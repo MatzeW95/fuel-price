@@ -32,7 +32,7 @@ function getFuelData(position) {
     }).then(function (text) {
         var data = JSON.parse(text);
         //enter new function here
-        console.log(text);
+        console.log(data.stations[0].brand);
     }).catch(function (error) {
         console.error(error);
     });
