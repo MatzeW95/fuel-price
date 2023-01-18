@@ -1,0 +1,12 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    width: 80%;
+    text-align: center;
+}
