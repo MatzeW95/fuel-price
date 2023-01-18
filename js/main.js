@@ -16,11 +16,6 @@ function getLocation() {
     }
 }
 
-function showPosition(position) {
-    console.log("Lat: " + position.coords.latitude + 
-    " Long: " + position.coords.longitude);
-}
-
 function getFuelData(position) {
 
     var url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude + "&rad=5&sort=dist&type=all&apikey=" + key;
