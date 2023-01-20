@@ -5,37 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="./js/main.js"></script>
 
-    <title>Sprit Preise</title>
+    <title>Spritpreise</title>
 </head>
 <body>
     <main>
         <h1>
-            Sprit Preise
+            Spritpreise
         </h1>
-        <!--
-        <form id="formSearch">
-            <select name="" id="formType">
-                <option value="diesel" selected="selected">Diesel</option>
-                <option value="e5">Super</option>
-                <option value="e10">Super E10</option>
-            </select>
-            <select name="" id="formRadius">
-                <option value="5" selected="selected">5 km</option>
-                <option value="10">10 km</option>
-                <option value="25">25 km</option>
-            </select>
-            <button id="formSubmit">Suchen</button>
-        </form>
-        -->
         <div id="searchOutput">
-            <!--
-            name / distance / preis1 / preis2 / preis3 / more info
-            (only show if open)
-            -->
-            Westfalen 0.9km 1.779€ 1.789€ 1.729€ button
+            <table id="outputTable">
+                <tr>
+                    <th>Tankstelle</th>
+                    <th>Entfernung</th>
+                    <th>Diesel</th>
+                    <th>e5</th>
+                    <th>e10</th>
+                </tr>
+            </table>
         </div>
     </main>
-    <script type="module" src="./js/main.js"></script>
 </body>
 </html>
