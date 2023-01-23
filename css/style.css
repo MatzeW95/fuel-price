@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
+:root {
+    --background: #3AAFA9;
+    --headline: #FEFFFF;
+    --text: #17252A;
+    --decoration: #2B7A78;
+    --hover: #7fe9e4;
+}
+
 body {
     margin: 0px;
     padding: 0px;
@@ -7,11 +15,13 @@ body {
     display: flex;
     justify-content: center;
 
-    color: white;
-    background-color: black;
+    color: var(--text);
+    background-color: var(--background);
     font-size: 20px;
     font-family: "Roboto", sans-serif;
     font-weight: 400;
+
+    border-color: var(--decoration);
 }
 
 main {
@@ -20,4 +30,48 @@ main {
 
 h1 {
     text-align: center;
+    color: var(--headline);
 }
+
+a {
+    color: var(--decoration);
+    text-decoration: none;
+}
+
+table {
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    border-spacing: 0px;
+
+    display: none;
+}
+
+tr:first-child:hover {
+    background-color: var(--background);
+}
+
+tr:hover {
+    background-color: var(--hover)
+}
+
+#loader {
+    border: 16px solid var(--headline);
+    border-radius: 50%;
+    border-top: 16px solid var(--decoration);
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
