@@ -4,26 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.ico">
     <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="./js/main.js"></script>
 
-    <title>Spritpreise</title>
+    <title>Tankstellen Finder | Matthias Wagner</title>
 </head>
 <body>
     <main>
         <h1>
-            Spritpreise
+            Tankstellen Finder
         </h1>
         <div id="searchOutput">
             <table id="outputTable">
-                <tr>
-                    <th>Tankstelle</th>
-                    <th>Entfernung</th>
-                    <th>Diesel</th>
-                    <th>e5</th>
-                    <th>e10</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Tankstelle</th>
+                        <th>Entfernung</th>
+                        <th>Diesel</th>
+                        <th>e5</th>
+                        <th>e10</th>
+                    </tr>
+                </thead>
             </table>
+            <div id="loader"></div>
         </div>
     </main>
 </body>
