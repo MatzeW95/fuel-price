@@ -17,6 +17,8 @@ function getLocation() {
 
 function getFuelData(position) {
 
+    //console.log(position.coords.latitude + " / " + position.coords.longitude)
+
     var url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude + "&rad=5&sort=dist&type=all&apikey=" + key;
 
     fetch(url, {
@@ -50,25 +52,38 @@ function createOutputData(inputData) {
         document.getElementById("outputRow" + i).appendChild(td);
 
         var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].dist + "km");
+        var tdData = document.createTextNode(inputData[i].dist + " km");
         td.appendChild(tdData);
         document.getElementById("outputRow" + i).appendChild(td);
 
         var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].diesel + "€");
+        var tdData = document.createTextNode(inputData[i].diesel + " €");
         td.appendChild(tdData);
         document.getElementById("outputRow" + i).appendChild(td);
 
         var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].e5 + "€");
+        var tdData = document.createTextNode(inputData[i].e5 + " €");
         td.appendChild(tdData);
         document.getElementById("outputRow" + i).appendChild(td);
 
         var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].e10 + "€");
+        var tdData = document.createTextNode(inputData[i].e10 + " €");
         td.appendChild(tdData);
+        document.getElementById("outputRow" + i).appendChild(td);
+
+        var td = document.createElement("TD");
+        td.innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + inputData[i].lat + '%2C' + inputData[i].lng + '&travelmode=driving">>></a>';
         document.getElementById("outputRow" + i).appendChild(td);
     }
 
-    //possible gogle maps link https://www.google.com/maps/dir/?api=1&destination=52.26652%2C7.78843&travelmode=driving
+    showTable();
+}
+
+function showTable() {
+    
+    var table = document.getElementById("outputTable");
+    var loader = document.getElementById("loader");
+
+    table.style.display = "block";
+    loader.style.display = "none";
 }
