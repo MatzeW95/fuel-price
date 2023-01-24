@@ -1,6 +1,16 @@
 import { apiKey } from "./apiKey.js";
 const key = apiKey.apiKey;
 
+document.getElementById("thTankstelle").addEventListener("click", sort);
+document.getElementById("thEntfernung").addEventListener("click", sort);
+document.getElementById("thDiesel").addEventListener("click", sort);
+document.getElementById("the5").addEventListener("click", sort);
+document.getElementById("the10").addEventListener("click", sort);
+document.getElementById("thRoute").addEventListener("click", sort);
+
+function sort() {
+    console.log("test");
+}
 
 window.onload = function () {
  
