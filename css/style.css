@@ -86,6 +86,7 @@ th {
     position: sticky; 
     top: 0;
     background-color: var(--decoration);
+    cursor: pointer;
 }
 
 td:first-child {
@@ -121,7 +122,7 @@ footer {
     background-color: var(--decoration);
 }
 
-#terms {
+.terms {
     font-size: small;
     margin: 0.5rem 10%;
 }
