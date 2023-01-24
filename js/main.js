@@ -1,15 +1,18 @@
 import { apiKey } from "./apiKey.js";
 const key = apiKey.apiKey;
+const dataEndpoints = 8;
 
-document.getElementById("thTankstelle").addEventListener("click", sort);
-document.getElementById("thEntfernung").addEventListener("click", sort);
-document.getElementById("thDiesel").addEventListener("click", sort);
-document.getElementById("the5").addEventListener("click", sort);
-document.getElementById("the10").addEventListener("click", sort);
-document.getElementById("thRoute").addEventListener("click", sort);
+var outputData = [];
 
-function sort() {
-    console.log("test");
+document.getElementById("thTankstelle").addEventListener("click", function() { sort(0) });
+document.getElementById("thEntfernung").addEventListener("click", function() { sort(1) });
+document.getElementById("thDiesel").addEventListener("click", function() { sort(2) });
+document.getElementById("the5").addEventListener("click", function() { sort(3) });
+document.getElementById("the10").addEventListener("click", function() { sort(4) });
+document.getElementById("thRoute").addEventListener("click", function() { sort(5) });
+
+function sort(column) {
+    alert("Säule: " + column);
 }
 
 window.onload = function () {
@@ -27,8 +30,6 @@ function getLocation() {
 
 function getFuelData(position) {
 
-    //console.log(position.coords.latitude + " / " + position.coords.longitude)
-
     var url = "https://creativecommons.tankerkoenig.de/json/list.php?lat=" + position.coords.latitude + "&lng=" + position.coords.longitude + "&rad=5&sort=dist&type=all&apikey=" + key;
 
     fetch(url, {
@@ -39,51 +40,90 @@ function getFuelData(position) {
 
         var data = JSON.parse(text);
 
-        createOutputData(data.stations);
+        createDataArray(data.stations);
+
     }).catch(function (error) {
         console.error(error);
     });
 }
 
-function createOutputData(inputData) {
+function createDataArray(inputData) {
 
-    for (let i = 0; i < inputData.length; i++) {
-        //console.log(inputData[i].brand);
-        //document.getElementById("searchOutput").innerHTML += inputData[i].brand + " / " + inputData[i].dist + "km / " + inputData[i].diesel + "€ / "  + inputData[i].e5 + "€ / "  + inputData[i].e10 + "€ <br>";
+    var dataArray = new Array(inputData.length);
+
+    for (let i = 0; i < dataArray.length; i++) {
+
+        dataArray[i] = new Array(dataEndpoints);
+
+        dataArray[i][0] = inputData[i].brand;
+        dataArray[i][1] = inputData[i].dist;
+        dataArray[i][2] = inputData[i].diesel;
+        dataArray[i][3] = inputData[i].e5;
+        dataArray[i][4] = inputData[i].e10;
+        dataArray[i][5] = inputData[i].lat;
+        dataArray[i][6] = inputData[i].lng;
+        dataArray[i][7] = inputData[i].isOpen;
+    }
+
+    checkDataArray(dataArray);
+}
+
+function checkDataArray(dataArray) {
     
+    for (let i = 0; i < dataArray.length; i++) {
+    
+        for (let j = 0; j < dataEndpoints; j++) {
+            
+            if (dataArray[i][j] == null || dataArray[i][j] == "" || dataArray[i][7] == false) {   //check for missing data and for gas stations which are already closed
+
+                dataArray.splice(i, 1);
+
+                j = dataEndpoints - 1;
+            }
+        }    
+    }
+
+    outputData = dataArray;
+    
+    showDataArray(outputData);
+}
+
+function showDataArray(dataArray) {
+
+    // Adding km metric
+    for (let i = 0; i < dataArray.length; i++) {
+        
+        dataArray[i][1] = dataArray[i][1].toFixed(1) + " km";
+    }   
+
+    // Adding € metric / k=2 endpoint "diesel" until k=4 endpoint "e10"
+    for (let j = 0; j < dataArray.length; j++) {
+        
+        for (let k = 2; k < 5; k++) {
+            
+            dataArray[j][k] = dataArray[j][k] + " €";
+        }
+    }
+
+    // Display data in table
+    for (let l = 0; l < dataArray.length; l++) {
+        
         var tr = document.createElement("TR");
-        tr.setAttribute("id", "outputRow" + i);
+        tr.setAttribute("id", "outputRow" + l);
         tr.setAttribute("class", "tableOutputRow")
         document.getElementById("outputTable").appendChild(tr);
 
-        var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].brand);
-        td.appendChild(tdData);
-        document.getElementById("outputRow" + i).appendChild(td);
+        for (let m = 0; m < dataEndpoints - 3; m++) {
+        
+            var td = document.createElement("TD");
+            var tdData = document.createTextNode(dataArray[l][m]);
+            td.appendChild(tdData);
+            document.getElementById("outputRow" + l).appendChild(td);        
+        }
 
         var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].dist + " km");
-        td.appendChild(tdData);
-        document.getElementById("outputRow" + i).appendChild(td);
-
-        var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].diesel + " €");
-        td.appendChild(tdData);
-        document.getElementById("outputRow" + i).appendChild(td);
-
-        var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].e5 + " €");
-        td.appendChild(tdData);
-        document.getElementById("outputRow" + i).appendChild(td);
-
-        var td = document.createElement("TD");
-        var tdData = document.createTextNode(inputData[i].e10 + " €");
-        td.appendChild(tdData);
-        document.getElementById("outputRow" + i).appendChild(td);
-
-        var td = document.createElement("TD");
-        td.innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + inputData[i].lat + '%2C' + inputData[i].lng + '&travelmode=driving">>></a>';
-        document.getElementById("outputRow" + i).appendChild(td);
+        td.innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + dataArray[l][5] + '%2C' + dataArray[l][6] + '&travelmode=driving">>></a>';
+        document.getElementById("outputRow" + l).appendChild(td);
     }
 
     showTable();
