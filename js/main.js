@@ -69,22 +69,27 @@ function createDataArray(inputData) {
 }
 
 function checkDataArray(dataArray) {
+
+    var newDataArray = dataArray;
     
     for (let i = 0; i < dataArray.length; i++) {
     
         for (let j = 0; j < dataEndpoints; j++) {
             
-            if (dataArray[i][j] == null || dataArray[i][j] == "" || dataArray[i][7] == false) {   //check for missing data and for gas stations which are already closed
+            if (dataArray[i][j] === null || dataArray[i][j] === "" || dataArray[i][j] === "null" || dataArray[i][j] === false || dataArray[i][j] === "false") {   //check for missing data and for gas stations which are already closed
+                
+                //console.log(i + "/" + j + " / " + dataArray[i][j])
 
-                dataArray.splice(i, 1);
+                newDataArray.splice(i, 1);
 
-                j = dataEndpoints - 1;
+                j = dataEndpoints;
+                i = i - 1;
             }
         }    
     }
+console.log(newDataArray);
+    outputData = newDataArray;
 
-    outputData = dataArray;
-    
     showDataArray(outputData);
 }
 
