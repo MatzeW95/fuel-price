@@ -2,6 +2,8 @@ import { apiKey } from "./apiKey.js";
 const key = apiKey.apiKey;
 const dataEndpoints = 8;
 
+var sortColumn = 1;
+var alreadySortedASC = true;
 var outputData = [];
 
 document.getElementById("thTankstelle").addEventListener("click", function() { sort(0) });
@@ -9,11 +11,6 @@ document.getElementById("thEntfernung").addEventListener("click", function() { s
 document.getElementById("thDiesel").addEventListener("click", function() { sort(2) });
 document.getElementById("the5").addEventListener("click", function() { sort(3) });
 document.getElementById("the10").addEventListener("click", function() { sort(4) });
-document.getElementById("thRoute").addEventListener("click", function() { sort(5) });
-
-function sort(column) {
-    alert("Säule: " + column);
-}
 
 window.onload = function () {
  
@@ -125,12 +122,14 @@ function showDataArray(dataArray) {
             for (let m = 0; m < dataEndpoints - 3; m++) {
             
                 var td = document.createElement("TD");
+                td.setAttribute("id", "outputField" + l + "/" + m);
                 var tdData = document.createTextNode(dataArray[l][m]);
                 td.appendChild(tdData);
                 document.getElementById("outputRow" + l).appendChild(td);        
             }
 
             var td = document.createElement("TD");
+            td.setAttribute("id", "outputField" + l + "/5");
             td.innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + dataArray[l][5] + '%2C' + dataArray[l][6] + '&travelmode=driving">>></a>';
             document.getElementById("outputRow" + l).appendChild(td);
         }
@@ -159,4 +158,69 @@ function hideTable() {
     loader.style.display = "none";
 
     error.style.display = "block";
+}
+
+function sort(column) {
+    
+    let myPromise = new Promise(function(myResolve, myReject) {
+    
+        if(column == sortColumn) {
+
+            if (alreadySortedASC == false) {
+
+                var newOrder = outputData.sort(sortASC);
+                alreadySortedASC = true;
+            }
+            else {
+                var newOrder = outputData.sort(sortDESC);
+                alreadySortedASC = false;
+            }
+        }
+        else {
+            
+            sortColumn = column;
+
+            var newOrder = outputData.sort(sortASC);
+            alreadySortedASC = true;
+        }
+
+        myResolve(newOrder); 
+        myReject(console.log(error));  
+    });
+    
+    myPromise.then(
+      function(value) { 
+    
+        for (let l = 0; l < value.length; l++) {
+
+            for (let m = 0; m < dataEndpoints - 3; m++) {
+    
+                document.getElementById("outputField" + l + "/" + m).innerHTML = value[l][m];
+            }
+
+            document.getElementById("outputField" + l + "/5").innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + value[l][5] + '%2C' + value[l][6] + '&travelmode=driving">>></a>';
+        }    
+    },
+      function(error) {console.log(error)}
+    );
+}
+
+function sortASC(a, b) {
+
+    if (a[sortColumn] === b[sortColumn]) {
+        return 0;
+    }
+    else {
+        return (a[sortColumn] < b[sortColumn]) ? -1 : 1;
+    }
+}
+
+function sortDESC(a, b) {
+
+    if (a[sortColumn] === b[sortColumn]) {
+        return 0;
+    }
+    else {
+        return (a[sortColumn] > b[sortColumn]) ? -1 : 1;
+    }
 }
