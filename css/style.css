@@ -122,6 +122,10 @@ footer {
     background-color: var(--decoration);
 }
 
+#errorNoData {
+    display: none;
+}
+
 .terms {
     font-size: small;
     margin: 0.5rem 10%;
