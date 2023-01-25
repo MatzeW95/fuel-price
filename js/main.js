@@ -77,8 +77,6 @@ function checkDataArray(dataArray) {
         for (let j = 0; j < dataEndpoints; j++) {
             
             if (dataArray[i][j] === null || dataArray[i][j] === "" || dataArray[i][j] === "null" || dataArray[i][j] === false || dataArray[i][j] === "false") {   //check for missing data and for gas stations which are already closed
-                
-                //console.log(i + "/" + j + " / " + dataArray[i][j])
 
                 newDataArray.splice(i, 1);
 
@@ -87,7 +85,7 @@ function checkDataArray(dataArray) {
             }
         }    
     }
-console.log(newDataArray);
+
     outputData = newDataArray;
 
     showDataArray(outputData);
@@ -95,43 +93,50 @@ console.log(newDataArray);
 
 function showDataArray(dataArray) {
 
-    // Adding km metric
-    for (let i = 0; i < dataArray.length; i++) {
+    if (dataArray.length == 0) {
         
-        dataArray[i][1] = dataArray[i][1].toFixed(1) + " km";
-    }   
+        hideTable();
+    }
+    else {
 
-    // Adding € metric / k=2 endpoint "diesel" until k=4 endpoint "e10"
-    for (let j = 0; j < dataArray.length; j++) {
-        
-        for (let k = 2; k < 5; k++) {
+        // Adding km metric
+        for (let i = 0; i < dataArray.length; i++) {
             
-            dataArray[j][k] = dataArray[j][k] + " €";
+            dataArray[i][1] = dataArray[i][1].toFixed(1) + " km";
+        }   
+
+        // Adding € metric / k=2 endpoint "diesel" until k=4 endpoint "e10"
+        for (let j = 0; j < dataArray.length; j++) {
+            
+            for (let k = 2; k < 5; k++) {
+                
+                dataArray[j][k] = dataArray[j][k] + " €";
+            }
         }
-    }
 
-    // Display data in table
-    for (let l = 0; l < dataArray.length; l++) {
-        
-        var tr = document.createElement("TR");
-        tr.setAttribute("id", "outputRow" + l);
-        tr.setAttribute("class", "tableOutputRow")
-        document.getElementById("outputTable").appendChild(tr);
+        // Display data in table
+        for (let l = 0; l < dataArray.length; l++) {
+            
+            var tr = document.createElement("TR");
+            tr.setAttribute("id", "outputRow" + l);
+            tr.setAttribute("class", "tableOutputRow")
+            document.getElementById("outputTable").appendChild(tr);
 
-        for (let m = 0; m < dataEndpoints - 3; m++) {
-        
+            for (let m = 0; m < dataEndpoints - 3; m++) {
+            
+                var td = document.createElement("TD");
+                var tdData = document.createTextNode(dataArray[l][m]);
+                td.appendChild(tdData);
+                document.getElementById("outputRow" + l).appendChild(td);        
+            }
+
             var td = document.createElement("TD");
-            var tdData = document.createTextNode(dataArray[l][m]);
-            td.appendChild(tdData);
-            document.getElementById("outputRow" + l).appendChild(td);        
+            td.innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + dataArray[l][5] + '%2C' + dataArray[l][6] + '&travelmode=driving">>></a>';
+            document.getElementById("outputRow" + l).appendChild(td);
         }
 
-        var td = document.createElement("TD");
-        td.innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + dataArray[l][5] + '%2C' + dataArray[l][6] + '&travelmode=driving">>></a>';
-        document.getElementById("outputRow" + l).appendChild(td);
+        showTable();
     }
-
-    showTable();
 }
 
 function showTable() {
@@ -140,5 +145,18 @@ function showTable() {
     var loader = document.getElementById("loader");
 
     table.style.display = "block";
+    
     loader.style.display = "none";
+}
+
+function hideTable() {
+
+    var table = document.getElementById("outputTable");
+    var loader = document.getElementById("loader");
+    var error = document.getElementById("errorNoData");
+    
+    table.style.display = "none";
+    loader.style.display = "none";
+
+    error.style.display = "block";
 }
