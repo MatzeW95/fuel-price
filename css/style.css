@@ -23,114 +23,130 @@ body {
     border-color: var(--decoration);
 }
 
-main {
-    width: 80%;
-    margin: auto;
-}
+@media screen and (min-width: 950px) {
 
-h1 {
-    text-align: center;
-    color: var(--headline);
-}
-
-a {
-    color: var(--headline);
-    text-decoration: none;
-}
-
-tr:first-child {
-    background-color: var(--decoration);
-}
-
-tr:first-child:hover {
-    background-color: var(--decoration);
-}
-
-tr:nth-child(even) {
-    background-color: var(--secondTr);
-}
-
-tr:hover {
-    background-color: var(--hover)
-}
-
-#searchOutput {
-    width: 100%;
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    overflow: auto;
-}
-
-#outputTable {
-    border: 2px solid var(--decoration);
+    main {
+        width: 80%;
+        margin: auto;
+    }
     
-    margin: 0px;
-    padding: 0px;
-    border-spacing: 0px;
-    overflow: auto;
-    display: none;
-    max-height: 400px;
-    max-width: 100%;
-    text-align: center;
+    h1 {
+        text-align: center;
+        color: var(--headline);
+    }
+    
+    a {
+        color: var(--headline);
+        text-decoration: none;
+    }
+    
+    tr:first-child {
+        background-color: var(--decoration);
+    }
+    
+    tr:first-child:hover {
+        background-color: var(--decoration);
+    }
+    
+    tr:nth-child(even) {
+        background-color: var(--secondTr);
+    }
+    
+    tr:hover {
+        background-color: var(--hover)
+    }
+    
+    #searchOutput {
+        width: 100%;
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        overflow: auto;
+    }
+    
+    #outputTable {
+        border: 2px solid var(--decoration);
+        
+        margin: 0px;
+        padding: 0px;
+        border-spacing: 0px;
+        overflow: auto;
+        display: none;
+        max-height: 400px;
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    td {
+        padding: 0.5rem 0.5rem;  
+        margin: 0px;
+    }
+    
+    th {
+        padding: 0.5rem 2rem;
+        position: sticky; 
+        top: 0;
+        background-color: var(--decoration);
+        cursor: pointer;
+    }
+    
+    th:last-child {
+        cursor: default;
+    }
+    
+    td:first-child {
+        text-align: left;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    #loader {
+        margin-top: 2rem;
+        border: 16px solid var(--headline);
+        border-radius: 50%;
+        border-top: 16px solid var(--decoration);
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+    }
+      
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+      
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: var(--decoration);
+    }
+    
+    #errorNoData {
+        display: none;
+    }
+    
+    .terms {
+        font-size: small;
+        margin: 0.5rem 10%;
+    }
 }
 
-td, th {
-    padding: 0.5rem 2rem;  
-    margin: 0px;
-}
+@media screen and (min-width: 1200px) {
 
-th {
-    position: sticky; 
-    top: 0;
-    background-color: var(--decoration);
-    cursor: pointer;
-}
-
-th:last-child {
-    cursor: default;
-}
-
-td:first-child {
-    text-align: left;
-}
-
-#loader {
-    margin-top: 2rem;
-    border: 16px solid var(--headline);
-    border-radius: 50%;
-    border-top: 16px solid var(--decoration);
-    width: 120px;
-    height: 120px;
-    -webkit-animation: spin 2s linear infinite; /* Safari */
-    animation: spin 2s linear infinite;
-}
-  
-/* Safari */
-@-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-}
-  
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--decoration);
-}
-
-#errorNoData {
-    display: none;
-}
-
-.terms {
-    font-size: small;
-    margin: 0.5rem 10%;
+    td:first-child {
+        
+        max-width: 400px;
+    }
 }
