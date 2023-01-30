@@ -82,6 +82,7 @@ body {
     td {
         padding: 0.5rem 0.5rem;  
         margin: 0px;
+        cursor: default;
     }
     
     th {
