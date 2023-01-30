@@ -123,6 +123,11 @@ function showDataArray(dataArray) {
             
                 var td = document.createElement("TD");
                 td.setAttribute("id", "outputField" + l + "/" + m);
+
+                if(m == 0) {
+                    td.setAttribute("title", dataArray[l][m]);
+                }
+
                 var tdData = document.createTextNode(dataArray[l][m]);
                 td.appendChild(tdData);
                 document.getElementById("outputRow" + l).appendChild(td);        
