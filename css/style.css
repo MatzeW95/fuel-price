@@ -23,11 +23,153 @@ body {
     border-color: var(--decoration);
 }
 
+@media screen and (max-width: 949px) {
+
+    #desktop {
+        display: none;
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--headline);
+    }
+
+    #mobile {
+        display: block;
+        width: 100%;
+        margin: 0px;
+    }
+
+    #orderSelection {
+        display: flex;
+        flex-direction: row;
+        margin: 0 5vw;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .orderItem {
+        cursor: pointer;
+        border: 2px solid var(--decoration);
+        background-color: var(--secondTr);
+        width: 10rem;
+        text-align: center;
+        border-radius: 5px;
+        padding: 0.5rem 0.5rem;
+    }
+
+    #slider {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(5, 90vw);
+        grid-template-rows: minmax(150px, 1fr);
+        
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        
+        list-style: none;
+        padding: 0 5vw 0 5vw;
+    }
+
+    .sliderItem {
+        position: relative;
+        scroll-snap-align: center;
+        border-radius: 10px;
+        border: 2px solid var(--decoration);
+        color: var(--headline);
+        background-color: var(--secondTr);
+        text-align: center;
+        margin: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .itemTankstelle {
+        text-align: center;
+        margin: 2rem 0 0;
+        max-width: 80vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .itemEntfernung {
+        margin: 5px 0 7rem;
+        font-size: 17px;
+    }
+
+    .itemPreisOverview {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        background-color: var(--decoration);
+        color: var(--headline);
+        padding: 0.3rem 0;
+    }
+
+    .itemPreis, .itemHeadline, .itemPreisDiesel, .itemPreisE5, .itemPreisE10 {
+        margin: 0;
+    }
+
+    .errorNoData {
+        text-align: center;
+        padding: 0 2rem;
+        display: none;
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: var(--decoration);
+    }
+
+    .terms {
+        font-size: small;
+        margin: 0.5rem 10%;
+    }
+}
+
+@media screen and (max-width: 825px) {
+
+    #orderSelection {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.5rem;
+        width: 90vw;
+        margin: auto;
+    }
+
+    .orderItem {
+        cursor: pointer;
+        border: 2px solid var(--decoration);
+        background-color: var(--secondTr);
+        text-align: center;
+        width:auto;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        margin: 0px;
+    }
+}
+
 @media screen and (min-width: 950px) {
 
     main {
         width: 80%;
         margin: auto;
+    }
+
+    #desktop {
+        display: block;
+    }
+
+    #mobile {
+        display: none;
     }
     
     h1 {
@@ -105,7 +247,7 @@ body {
         text-overflow: ellipsis;
     }
     
-    #loader {
+    .loader {
         margin-top: 2rem;
         border: 16px solid var(--headline);
         border-radius: 50%;
@@ -134,7 +276,7 @@ body {
         background-color: var(--decoration);
     }
     
-    #errorNoData {
+    .errorNoData {
         display: none;
     }
     
