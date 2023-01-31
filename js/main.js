@@ -146,23 +146,23 @@ function showDataArray(dataArray) {
 function showTable() {
     
     var table = document.getElementById("outputTable");
-    var loader = document.getElementById("loader");
+    var loader = document.getElementsByClassName("loader");
 
     table.style.display = "block";
     
-    loader.style.display = "none";
+    loader[0].style.display= "none";
 }
 
 function hideTable() {
 
     var table = document.getElementById("outputTable");
-    var loader = document.getElementById("loader");
-    var error = document.getElementById("errorNoData");
+    var loader = document.getElementsByClassName("loader");
+    var error = document.getElementsByClassName("errorNoData");
     
     table.style.display = "none";
-    loader.style.display = "none";
+    loader[0].style.display = "none";
 
-    error.style.display = "block";
+    error[0].style.display = "block";
 }
 
 function sort(column) {
