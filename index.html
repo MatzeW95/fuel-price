@@ -16,23 +16,77 @@
         <h1>
             Tankstellen Finder
         </h1>
-        <div id="searchOutput">
-            <table id="outputTable">
-                <thead>
-                    <tr>
-                        <th id="thTankstelle">Tankstelle</th>
-                        <th id="thEntfernung">Entfernung</th>
-                        <th id="thDiesel">Diesel</th>
-                        <th id="the5">e5</th>
-                        <th id="the10">e10</th>
-                        <th id="thRoute">Route</th>
-                    </tr>
-                </thead>
-            </table>
-            <p id="errorNoData">
+        <div id="desktop">
+            <div id="searchOutput">
+                <table id="outputTable">
+                    <thead>
+                        <tr>
+                            <th id="thTankstelle">Tankstelle</th>
+                            <th id="thEntfernung">Entfernung</th>
+                            <th id="thDiesel">Diesel</th>
+                            <th id="the5">e5</th>
+                            <th id="the10">e10</th>
+                            <th id="thRoute">Route</th>
+                        </tr>
+                    </thead>
+                </table>
+                <p class="errorNoData">
+                    Es konnte keine geöffnete Tankstelle im Umkreis von 5 km gefunden werden.
+                </p>
+                <div class="loader"></div>
+            </div>
+        </div>
+        <div id="mobile">
+            <div id="orderSelection">
+                <div id="orderItem1" class="orderItem">Entfernung</div>
+                <div id="orderItem2" class="orderItem">Diesel</div>
+                <div id="orderItem3" class="orderItem">e5</div>
+                <div id="orderItem4" class="orderItem">e10</div>
+            </div>
+            <ul id="slider">
+                <li class="sliderItem">
+                    <h2 class="itemTankstelle">
+                        Tankstelle
+                    </h2>
+                    <p class="itemEntfernung">
+                        0.7 km
+                    </p>
+                    <div class="itemPreisOverview">
+                        <div class="itemPreis">
+                            <p class="itemHeadline">
+                                Diesel
+                            </p>
+                            <p class="itemPreisDiesel">
+                                1.799 €
+                            </p>
+                        </div>
+                        <div class="itemPreis">
+                            <p class="itemHeadline">
+                               e5 
+                            </p>
+                            <p class="itemPreisE5">
+                                1.799 €
+                            </p>
+                        </div>
+                        <div class="itemPreis">
+                            <p class="itemHeadline">
+                                e10
+                            </p>
+                            <p class="itemPreisE10">
+                                1.799 €
+                            </p>
+                        </div>
+                    </div>
+                </li>
+                <li class="sliderItem">test</li>
+                <li class="sliderItem">test</li>
+                <li class="sliderItem">test</li>
+                <li class="sliderItem">test</li>
+            </ul>
+            <p class="errorNoData">
                 Es konnte keine geöffnete Tankstelle im Umkreis von 5 km gefunden werden.
             </p>
-            <div id="loader"></div>
+            <div class="loader"></div>
         </div>
     </main>
     <footer>
