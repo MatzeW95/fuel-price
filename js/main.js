@@ -185,7 +185,7 @@ console.table(dataArray);
             for (let o = 0; o < 3; o++) {
                 
                 var divPreis = document.createElement("div");
-                divPreis.setAttribute("id", "preis" + n + "/" + o);
+                divPreis.setAttribute("id", "listItems" + n + "/" + o);
                 divPreis.setAttribute("class", "itemPreis");
 
                 var pHeadline = document.createElement("p");
