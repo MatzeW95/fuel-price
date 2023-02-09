@@ -23,6 +23,11 @@ body {
     border-color: var(--decoration);
 }
 
+a {
+    color: var(--headline);
+    text-decoration: none;
+}
+
 @media screen and (max-width: 949px) {
 
     #desktop {
@@ -173,11 +178,6 @@ body {
     h1 {
         text-align: center;
         color: var(--headline);
-    }
-    
-    a {
-        color: var(--headline);
-        text-decoration: none;
     }
     
     tr:first-child {
