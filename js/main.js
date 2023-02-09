@@ -157,8 +157,8 @@ function showDataArray(dataArray) {
         }
 
         // Display data in mobile view slider
-        document.getElementById("slider").style.gridTemplateColumns = dataArray.length + ", 90vw";
-
+        
+console.table(dataArray);
         for (let n = 0; n < dataArray.length; n++) {
 
             var li = document.createElement("li");
@@ -169,10 +169,12 @@ function showDataArray(dataArray) {
             var h2 = document.createElement("h2");
             h2.setAttribute("id", "tankstelle" + n);
             h2.setAttribute("class", "itemTankstelle");
+            h2.innerHTML = dataArray[n][0];
 
             var p = document.createElement("p");
             p.setAttribute("id", "entfernung" + n);
             p.setAttribute("class", "itemEntfernung");
+            p.innerHTML = dataArray[n][1]
 
             var div = document.createElement("div");
             div.setAttribute("id", "preis" + n);
@@ -194,19 +196,25 @@ function showDataArray(dataArray) {
                 pPreis.setAttribute("id", "preis" + n + "/" + o);
 
                 if (o == 0) {
+                    pHeadline.innerHTML = "Diesel"
                     pPreis.setAttribute("class", "itemPreisDiesel");
                 }
                 else if(o == 1) {
+                    pHeadline.innerHTML = "e5";
                     pPreis.setAttribute("class", "itemPreisE5"); 
                 }
                 else if(o == 2) {
+                    pHeadline.innerHTML = "e10";
                     pPreis.setAttribute("class", "itemPreisE10");
                 }
+
+                pPreis.innerHTML = dataArray[n][o + 2];
 
                 divPreis.append(pHeadline, pPreis);
                 div.appendChild(divPreis);
             }
         }
+        document.getElementById("slider").style.gridTemplateColumns =  "repeat(" + dataArray.length + ", 90vw)";
 
         loading = false;
         showResult();
