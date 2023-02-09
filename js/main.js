@@ -157,8 +157,6 @@ function showDataArray(dataArray) {
         }
 
         // Display data in mobile view slider
-        
-console.table(dataArray);
         for (let n = 0; n < dataArray.length; n++) {
 
             var li = document.createElement("li");
@@ -169,7 +167,7 @@ console.table(dataArray);
             var h2 = document.createElement("h2");
             h2.setAttribute("id", "tankstelle" + n);
             h2.setAttribute("class", "itemTankstelle");
-            h2.innerHTML = dataArray[n][0];
+            h2.innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + dataArray[n][5] + '%2C' + dataArray[n][6] + '&travelmode=driving">' + dataArray[n][0] + '</a>';
 
             var p = document.createElement("p");
             p.setAttribute("id", "entfernung" + n);
@@ -319,8 +317,10 @@ function sort(column) {
 
         //Mobile data update
         for (let m = 0; m < value.length; m++) {
-            
-            document.getElementById("tankstelle" + m).innerHTML = value[m][0];
+
+            document.getElementById("tankstelle" + m).innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + value[m][5] + '%2C' + value[m][6] + '&travelmode=driving">' + value[m][0] + '</a>';
+
+            //document.getElementById("tankstelle" + m).innerHTML = value[m][0];
             document.getElementById("entfernung" + m).innerHTML = value[m][1];
 
             for (let preisCount = 0; preisCount < 3; preisCount++) {
