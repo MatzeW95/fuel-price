@@ -305,7 +305,8 @@ function sort(column) {
     
     myPromise.then(
       function(value) { 
-    // we need to add slider for new sort here
+    
+        //Desktop data update
         for (let l = 0; l < value.length; l++) {
 
             for (let m = 0; m < dataEndpoints - 3; m++) {
@@ -315,6 +316,20 @@ function sort(column) {
 
             document.getElementById("outputField" + l + "/5").innerHTML = '<a href="https://www.google.com/maps/dir/?api=1&destination=' + value[l][5] + '%2C' + value[l][6] + '&travelmode=driving">>></a>';
         }    
+
+        //Mobile data update
+        for (let m = 0; m < value.length; m++) {
+            
+            document.getElementById("tankstelle" + m).innerHTML = value[m][0];
+            document.getElementById("entfernung" + m).innerHTML = value[m][1];
+
+            for (let preisCount = 0; preisCount < 3; preisCount++) {
+                
+                document.getElementById("preis" + m + "/" + preisCount).innerHTML = value[m][preisCount + 2];
+            }
+        }
+
+        document.getElementById("slider").scroll({left: 0, top: 0, behavior: "smooth"});
     },
       function(error) {console.log(error)}
     );
