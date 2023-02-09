@@ -133,7 +133,7 @@ function showDataArray(dataArray) {
             
             var tr = document.createElement("TR");
             tr.setAttribute("id", "outputRow" + l);
-            tr.setAttribute("class", "tableOutputRow")
+            tr.setAttribute("class", "tableOutputRow");
             document.getElementById("outputTable").appendChild(tr);
 
             for (let m = 0; m < dataEndpoints - 3; m++) {
@@ -157,6 +157,57 @@ function showDataArray(dataArray) {
         }
 
         // Display data in mobile view slider
+        document.getElementById("slider").style.gridTemplateColumns = dataArray.length + ", 90vw";
+
+        for (let n = 0; n < dataArray.length; n++) {
+
+            var li = document.createElement("li");
+            li.setAttribute("id", "listItem" + n);
+            li.setAttribute("class", "sliderItem");
+            document.getElementById("slider").appendChild(li);
+
+            var h2 = document.createElement("h2");
+            h2.setAttribute("id", "tankstelle" + n);
+            h2.setAttribute("class", "itemTankstelle");
+
+            var p = document.createElement("p");
+            p.setAttribute("id", "entfernung" + n);
+            p.setAttribute("class", "itemEntfernung");
+
+            var div = document.createElement("div");
+            div.setAttribute("id", "preis" + n);
+            div.setAttribute("class", "itemPreisOverview");
+
+            li.append(h2, p, div);
+
+            for (let o = 0; o < 3; o++) {
+                
+                var divPreis = document.createElement("div");
+                divPreis.setAttribute("id", "preis" + n + "/" + o);
+                divPreis.setAttribute("class", "itemPreis");
+
+                var pHeadline = document.createElement("p");
+                pHeadline.setAttribute("id", "headline" + n + "/" + o);
+                pHeadline.setAttribute("class", "itemHeadline");
+
+                var pPreis = document.createElement("p");
+                pPreis.setAttribute("id", "preis" + n + "/" + o);
+
+                if (o == 0) {
+                    pPreis.setAttribute("class", "itemPreisDiesel");
+                }
+                else if(o == 1) {
+                    pPreis.setAttribute("class", "itemPreisE5"); 
+                }
+                else if(o == 2) {
+                    pPreis.setAttribute("class", "itemPreisE10");
+                }
+
+                divPreis.append(pHeadline, pPreis);
+                div.appendChild(divPreis);
+            }
+        }
+
         loading = false;
         showResult();
     }
