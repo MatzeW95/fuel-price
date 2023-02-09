@@ -5,16 +5,29 @@ const dataEndpoints = 8;
 var sortColumn = 1;
 var alreadySortedASC = true;
 var outputData = [];
+var loading = true;
 
+//Desktop sorting buttons
 document.getElementById("thTankstelle").addEventListener("click", function() { sort(0) });
 document.getElementById("thEntfernung").addEventListener("click", function() { sort(1) });
 document.getElementById("thDiesel").addEventListener("click", function() { sort(2) });
 document.getElementById("the5").addEventListener("click", function() { sort(3) });
 document.getElementById("the10").addEventListener("click", function() { sort(4) });
 
+//Mobile sorting buttons
+document.getElementById("orderItem1").addEventListener("click", function() {sort(1)});
+document.getElementById("orderItem2").addEventListener("click", function() {sort(2)});
+document.getElementById("orderItem3").addEventListener("click", function() {sort(3)});
+document.getElementById("orderItem4").addEventListener("click", function() {sort(4)});
+
 window.onload = function () {
  
     getLocation();
+}
+
+window.onresize = function () {
+
+    showResult();
 }
 
 function getLocation() {
@@ -92,7 +105,7 @@ function showDataArray(dataArray) {
 
     if (dataArray.length == 0) {
         
-        hideTable();
+        hideResult();
     }
     else {
 
@@ -111,7 +124,11 @@ function showDataArray(dataArray) {
             }
         }
 
-        // Display data in table
+        // here we have to look for mobil or desktop view
+        //and than decide if we ned to update the table or the slider
+        //but maybe it would be useful to do both cause of the possible new resize
+
+        // Display data in desktop view table
         for (let l = 0; l < dataArray.length; l++) {
             
             var tr = document.createElement("TR");
@@ -139,30 +156,64 @@ function showDataArray(dataArray) {
             document.getElementById("outputRow" + l).appendChild(td);
         }
 
-        showTable();
+        // Display data in mobile view slider
+        loading = false;
+        showResult();
     }
 }
 
-function showTable() {
+function showResult() {
     
     var table = document.getElementById("outputTable");
+    var orderSelection = document.getElementById("orderSelection");
+    var slider = document.getElementById("slider");
     var loader = document.getElementsByClassName("loader");
 
-    table.style.display = "block";
-    
-    loader[0].style.display= "none";
+    if(loading == false) {
+
+        loader[0].style.display = "none";
+        loader[1].style.display = "none";
+
+        if (window.outerWidth <= 950) {
+
+            if(window.outerWidth <= 825) {
+                orderSelection.style.display = "grid";
+            }
+            else {
+                orderSelection.style.display = "flex";  
+            }
+            
+            slider.style.display = "grid";        
+        }
+        else {
+            table.style.display = "block";
+        }
+    }
 }
 
-function hideTable() {
+function hideResult() {
 
     var table = document.getElementById("outputTable");
+    var orderSelection = document.getElementById("orderSelection");
+    var slider = document.getElementById("slider");
     var loader = document.getElementsByClassName("loader");
     var error = document.getElementsByClassName("errorNoData");
-    
+
+    orderSelection.style.display = "none";
+    slider.style.display = "none";
+    loader[1].style.display = "none";
+
     table.style.display = "none";
     loader[0].style.display = "none";
 
-    error[0].style.display = "block";
+    if(window.outerWidth <= 950) {
+        
+        error[1].style.display = "block";
+    }
+    else {
+        
+        error[0].style.display = "block";
+    }
 }
 
 function sort(column) {
@@ -195,7 +246,7 @@ function sort(column) {
     
     myPromise.then(
       function(value) { 
-    
+    // we need to add slider for new sort here
         for (let l = 0; l < value.length; l++) {
 
             for (let m = 0; m < dataEndpoints - 3; m++) {
